@@ -10,11 +10,11 @@ var PORT = process.env.PORT || 3000;
 // Starts the server to begin listening
 var tables = [
     {
-            name: "group 7",
-            email: "123@gmail.com",
-            phoneNumber: 919-999-9999,  
-            uniqueID: 1
-          }
+        name: "group 7",
+        email: "123@gmail.com",
+        phoneNumber: 919 - 999 - 9999,
+        uniqueID: 1
+    }
 ];
 
 
@@ -27,29 +27,46 @@ var waitlist = [];
 /////////
 /////routes
 ///////// 
-  app.get("/", function(req, res) {
+app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "view.html"));
-  });
-  
-  app.get("/reserve", function(req, res) {
+});
+
+app.get("/reserve", function (req, res) {
     res.sendFile(path.join(__dirname, "reserve.html"));
-  });
-  
-  app.get("/tables", function(req, res) {
+});
+
+app.get("/tables", function (req, res) {
     res.sendFile(path.join(__dirname, "tables.html"));
-  });
+});
 
 //////
 // api links
 //////
-  app.get("/api/tables", function(req, res) {
+app.get("/api/tables", function (req, res) {
     return res.json(tables);
-  });
+});
 
-  app.get("/api/waitlist", function(req, res) {
+app.get("/api/waitlist", function (req, res) {
     return res.json(waitlist);
-  });
+});
 
+//Get the reservation and decide what to do with it
+app.get("/api/reservationProcess", function (req, res) {
+
+    var newreservation = req.body;
+
+    if (tables.length < 5) {
+        app.post("/api/tables", function (req, res) {
+            tables.push(newreservation);
+        });
+    }
+    else {
+        app.post("/api/waitlist", function (req, res) {
+            waitlist.push(newreservation);
+        });
+    }
+
+});
 
 
 // =============================================================
