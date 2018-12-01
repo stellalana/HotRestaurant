@@ -61,6 +61,28 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+        $("submit").on("click", function(event) {
+            event.preventDefault();
+            var newReservation = {
+               name: $("#name").val().trim(),
+               email: $("#email").val().trim(),
+               phoneNumber: $("#phone").val().trim(),
+               uniqueID: $("#id").val().trim()
+            };
+
+            $.post("/api/reservationProcess", newReservation)
+                .then(function(data) {
+                    alert("Your reservation is being processed...");
+
+                    $("#name").val("");
+                    $("#email").val("");
+                    $("#phone").val("");
+                    $("#id").val("");
+                });
+        });   
+    </script>
+
 </body>
 
 </html>
