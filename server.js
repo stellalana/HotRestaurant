@@ -7,6 +7,11 @@ var path = require("path");
 // =============================================================
 var app = express();
 var PORT = process.env.PORT || 3000;
+
+// Sets up the Express app to handle data parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // Starts the server to begin listening
 var tables = [
     {
@@ -51,9 +56,11 @@ app.get("/api/waitlist", function (req, res) {
 });
 
 //Get the reservation and decide what to do with it
-app.get("/api/reservationProcess", function (req, res) {
+app.post("/api/reservationProcess", function (req, res) {
 
+    console.log("HERE");
     var newreservation = req.body;
+    console.log(req.body);
 
     if (tables.length < 5) {
         app.post("/api/tables", function (req, res) {
