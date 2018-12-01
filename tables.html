@@ -20,8 +20,8 @@
             <hr>
             
             <div class="text-center">
-                    <a href="reserve.html"><button class="btn btn-lg btn-primary"><span class="fa fa-calendar"></span> Make a Reservation</button></a>
-                <a href="view.html"><button class="btn btn-lg btn-default"><span class="fa fa-home"></span> Go Home</button></a>
+                <a href="/reserve.html"><button class="btn btn-lg btn-primary"><span class="fa fa-calendar"></span> Make a Reservation</button></a>
+                <a href="/view.html"><button class="btn btn-lg btn-default"><span class="fa fa-home"></span> Go Home</button></a>
             </div>
         </div>
 
@@ -29,18 +29,28 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">Current Reservations</div>
-                    <div class="card-body"></div>
+                    <div class="card-body">
+                        <div class="reservations"></div>
+                    </div>
                 </div>
             </div>
 
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">Wait list</div>
-                    <div class="card-body"></div>
+                    <div class="card-body">
+                        <div class="waitlist"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $.get("/api/tables", function(data) {
+
+        });
+    </script>
 
 </body>
 
