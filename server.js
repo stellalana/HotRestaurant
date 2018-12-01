@@ -58,11 +58,13 @@ app.get("/api/reservationProcess", function (req, res) {
     if (tables.length < 5) {
         app.post("/api/tables", function (req, res) {
             tables.push(newreservation);
+            res.json(newreservation);
         });
     }
     else {
         app.post("/api/waitlist", function (req, res) {
             waitlist.push(newreservation);
+            res.json(newreservation);
         });
     }
 
