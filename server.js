@@ -14,20 +14,9 @@ app.use(express.json());
 
 // Starts the server to begin listening
 var tables = [
-    {
-        name: "group 7",
-        email: "123@gmail.com",
-        phoneNumber: 919 - 999 - 9999,
-        uniqueID: 1
-    }
 ];
 
-
 var waitlist = [];
-
-
-
-
 
 /////////
 /////routes
@@ -57,26 +46,30 @@ app.get("/api/waitlist", function (req, res) {
 
 //Get the reservation and decide what to do with it
 app.post("/api/reservationProcess", function (req, res) {
-
-    console.log("HERE");
     var newreservation = req.body;
     console.log(req.body);
 
     if (tables.length < 5) {
-        app.post("/api/tables", function (req, res) {
-            tables.push(newreservation);
-            res.json(newreservation);
-        });
+        postTablesCalled(req, res, newreservation);
     }
     else {
-        app.post("/api/waitlist", function (req, res) {
-            waitlist.push(newreservation);
-            res.json(newreservation);
-        });
+        postWaitListCalled(req, res, newreservation);
     }
-
 });
 
+app.post("/api/tables", postTablesCalled);
+
+app.post("/api/waitlist", postWaitListCalled);
+
+function postTablesCalled(req, res, obj) {
+    tables.push(obj);
+    res.json(obj);
+}
+
+function postWaitListCalled(req, res, obj) {
+    waitlist.push(obj);
+    res.json(obj);
+}
 
 // =============================================================
 app.listen(PORT, function () {

@@ -20,8 +20,8 @@
             <hr>
             
             <div class="text-center">
-                <a href="/tables.html"><button class="btn btn-lg btn-info"><span class="fa fa-coffee"></span> View Tables</button></a>
-                <a href="/view.html"><button class="btn btn-lg btn-default"><span class="fa fa-home"></span> Go Home</button></a>
+                <a href="/tables"><button class="btn btn-lg btn-info"><span class="fa fa-coffee"></span> View Tables</button></a>
+                <a href="/"><button class="btn btn-lg btn-default"><span class="fa fa-home"></span> Go Home</button></a>
             </div>
         </div>
 
@@ -53,16 +53,17 @@
                                 <input type="text" class="form-control" id="id">
                             </div>
 
-                            <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+                            <button id="submit" class="btn btn-lg btn-primary">Submit</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        <p><a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a></p>
     </div>
 
     <script type="text/javascript">
-        $("submit").on("click", function(event) {
+        $("#submit").on("click", function(event) {
             event.preventDefault();
             var newReservation = {
                name: $("#name").val().trim(),

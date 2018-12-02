@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Hot Restaurant!</title>
-  <!-- Latest compiled and minified CSS & JS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Hot Restaurant!</title>
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -18,10 +18,11 @@
         <div class="jumbotron">
             <h1 class="text-center">Hot Restaurant <span class="fa fa-cutlery"></span></h1>
             <hr>
-            
+
             <div class="text-center">
-                <a href="/reserve.html"><button class="btn btn-lg btn-primary"><span class="fa fa-calendar"></span> Make a Reservation</button></a>
-                <a href="/view.html"><button class="btn btn-lg btn-default"><span class="fa fa-home"></span> Go Home</button></a>
+                <a href="/reserve"><button class="btn btn-lg btn-primary"><span class="fa fa-calendar"></span> Make a
+                        Reservation</button></a>
+                <a href="/"><button class="btn btn-lg btn-default"><span class="fa fa-home"></span> Go Home</button></a>
             </div>
         </div>
 
@@ -44,11 +45,42 @@
                 </div>
             </div>
         </div>
+        <p><a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a></p>
     </div>
 
     <script type="text/javascript">
-        $.get("/api/tables", function(data) {
+        $.get("/api/tables", function (data) {
+            for (var i = 0; i < data.length; i++) {
+                console.log(data[i]);
+                var listGroupItem = $("<li class='list-group-item'>");
 
+                var tableNumber = i+1;
+                listGroupItem.append($("<h1>").text("Table #" + tableNumber));
+                listGroupItem.append($("<hr>"));
+                listGroupItem.append($("<h3>").text("Name: " + data[i].name));
+                listGroupItem.append($("<h3>").text("Email: " + data[i].email));
+                listGroupItem.append($("<h3>").text("Phone Number: " + data[i].phoneNumber));
+                listGroupItem.append($("<h3>").text("Unique ID: " + data[i].uniqueID));
+
+                $(".reservations").append(listGroupItem);
+            }
+        });
+
+        $.get("/api/waitlist", function (data) {
+            for (var i = 0; i < data.length; i++) {
+                console.log(data[i]);
+                var listGroupItem = $("<li class='list-group-item'>");
+
+                var tableNumber = i+1;
+                listGroupItem.append($("<h1>").text("Waitlist #" + tableNumber));
+                listGroupItem.append($("<hr>"));
+                listGroupItem.append($("<h3>").text("Name: " + data[i].name));
+                listGroupItem.append($("<h3>").text("Email: " + data[i].email));
+                listGroupItem.append($("<h3>").text("Phone Number: " + data[i].phoneNumber));
+                listGroupItem.append($("<h3>").text("Unique ID: " + data[i].uniqueID));
+
+                $(".waitlist").append(listGroupItem);
+            }
         });
     </script>
 
